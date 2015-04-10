@@ -1,0 +1,27 @@
+<%= @app_environment %>:
+<% @daemon_dir = @config['daemon']['dir'] || @dir %>
+  daemon:
+    app_name: <%= @config['id'] %>
+    daemons_count: <%= @config['daemon']['daemons_count'] %>
+    backtrace: <%= @config['daemon']['backtrace'] %>
+    dir_mode: <%= @config['daemon']['dir_mode'] %>
+    dir: <%= @daemon_dir %>
+    <% if @config['daemon']['log'] %>
+    log:
+      logger: <%= @config['daemon']['log']['logger'] %>
+      <% case @config['daemon']['log']['logger']
+         when 'file' %>
+      log_file: <%= File.join(@daemon_dir, @config['daemon']['log']['log_file']) %>
+      shift_age: <%= @config['daemon']['log']['shift_age'] %>
+      <% when 'syslog' %>
+      log_facility: <%= @config['daemon']['log']['log_facility'] %>
+      <% end %>
+    <% end %>
+    monitor: <%= @config['daemon']['monitor'] %>
+  scheduler:
+    interval: <%= @config['scheduler']['interval'] || '30m' %>
+    timeout: <%= @config['scheduler']['timeout'] || '10m' %>
+  pantry:
+    api_key: <%= @config['pantry']['pantry_api_key'] %>
+    request_timeout: <%= @config['pantry']['pantry_request_timeout'] %>
+    url: <%= @config['pantry']['pantry_url'] || @pantry_url %>
