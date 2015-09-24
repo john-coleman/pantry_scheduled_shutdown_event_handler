@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem 'pantry_daemon_common', git: 'git@github.com:wongatech/pantry_daemon_common.git'
+gem 'pantry_daemon_common', github: 'wongatech/pantry_daemon_common'
 
 group :development do
   gem 'bundler-audit', require: false
